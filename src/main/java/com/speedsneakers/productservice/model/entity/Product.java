@@ -1,16 +1,14 @@
-package com.speedsneakers.productservice.model.pojo;
+package com.speedsneakers.productservice.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
 /**
  * Modelo de datos del producto
  */
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "products")
 public class Product {
@@ -43,13 +41,13 @@ public class Product {
     /**
      * Descripción corta del producto
      */
-    @Column(name = "shortDescription")
+    @Column(name = "short_description")
     private String shortDescription;
 
     /**
      * Descripción larga del producto
      */
-    @Column(name = "longDescription")
+    @Column(name = "long_description")
     private String longDescription;
 
     /**
@@ -61,6 +59,6 @@ public class Product {
     /**
      * Imagen del producto
      */
-    @Column(name = "imageUrl")
+    @Column(name = "image_url")
     private String imageUrl;
 }

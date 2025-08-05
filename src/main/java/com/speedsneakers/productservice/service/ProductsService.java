@@ -1,7 +1,8 @@
 package com.speedsneakers.productservice.service;
 
 
-import com.speedsneakers.productservice.model.pojo.Product;
+import com.speedsneakers.productservice.model.dto.ProductDto;
+import com.speedsneakers.productservice.model.entity.Product;
 import com.speedsneakers.productservice.model.request.ProductRequest;
 
 import java.util.List;
@@ -14,22 +15,22 @@ public interface ProductsService {
     /**
      * Obtiene productos que coincidan con los filtros proporcionados.
      */
-    List<Product> getProducts(String name, String brand, String category);
+    List<ProductDto> getProducts(String name, String brand, String category);
 
     /**
      * Obtiene un producto por su ID.
      */
-    Product getProductById(String id);
+    ProductDto getProductById(String id);
 
     /**
      * Crea un nuevo producto.
      */
-    Product createProduct(ProductRequest request);
+    ProductDto createProduct(ProductRequest request);
 
     /**
      * Actualiza un producto existente.
      */
-    Product updateProduct(String id, ProductRequest request);
+    ProductDto updateProduct(String id, ProductRequest request);
 
     /**
      * Elimina un producto por su ID.

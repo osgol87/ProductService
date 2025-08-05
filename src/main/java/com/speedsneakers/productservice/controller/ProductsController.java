@@ -1,6 +1,6 @@
 package com.speedsneakers.productservice.controller;
 
-import com.speedsneakers.productservice.model.pojo.Product;
+import com.speedsneakers.productservice.model.dto.ProductDto;
 import com.speedsneakers.productservice.model.request.ProductRequest;
 import com.speedsneakers.productservice.service.ProductsService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST para manejar las operaciones relacionadas con productos.
+ */
 @RestController
 @Slf4j
 @RequestMapping("/products")
@@ -40,12 +43,12 @@ public class ProductsController {
      * @return La respuesta HTTP con la lista de productos.
      */
     @GetMapping
-    public ResponseEntity<List<Product>> getProducts(
+    public ResponseEntity<List<ProductDto>> getProducts(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String brand,
             @RequestParam(required = false) String category) {
 
-        List<Product> products = productsService.getProducts(name, brand, category);
+        List<ProductDto> products = productsService.getProducts(name, brand, category);
         return ResponseEntity.ok(products);
     }
 
@@ -55,9 +58,9 @@ public class ProductsController {
      * @return La respuesta HTTP con el producto obtenido.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable String id) {
+    public ResponseEntity<ProductDto> getProduct(@PathVariable String id) {
 
-        Product product = productsService.getProductById(id);
+        ProductDto product = productsService.getProductById(id);
         return ResponseEntity.ok(product);
     }
 
@@ -67,14 +70,9 @@ public class ProductsController {
      * @return La respuesta HTTP con el producto creado.
      */
     @PostMapping
-    public ResponseEntity<Product> addProduct(@RequestBody ProductRequest request) {
+    public ResponseEntity<ProductDto> addProduct(@RequestBody ProductRequest request) {
 
-        Product product = productsService.createProduct(request);
-
-        if (product == null) {
-            return ResponseEntity.badRequest().build();
-        }
-
+        ProductDto product = productsService.createProduct(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 
@@ -85,9 +83,9 @@ public class ProductsController {
      * @return La respuesta HTTP con el producto modificado.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable String id, @RequestBody ProductRequest request) {
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable String id, @RequestBody ProductRequest request) {
 
-        Product product = productsService.updateProduct(id, request);
+        ProductDto product = productsService.updateProduct(id, request);
         return ResponseEntity.ok(product);
 
     }
