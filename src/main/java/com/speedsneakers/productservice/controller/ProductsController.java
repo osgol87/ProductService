@@ -37,16 +37,12 @@ public class ProductsController {
 
     /**
      * Obtiene productos que coincidan con los filtros proporcionados.
-     * @param name El nombre del producto.
-     * @param brand La marca del producto.
-     * @param category La categoría del producto.
-     * @return La respuesta HTTP con la lista de productos.
+     * 
+     * @param search El término de búsqueda para filtrar productos por nombre, marca o categoría.
      */
     @GetMapping
     public ResponseEntity<List<ProductDto>> getProducts(
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String brand,
-            @RequestParam(required = false) String category) {
+            @RequestParam(required = false) String search) {
 
         List<ProductDto> products = productsService.getProducts(name, brand, category);
         return ResponseEntity.ok(products);

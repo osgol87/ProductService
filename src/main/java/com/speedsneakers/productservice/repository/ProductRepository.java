@@ -18,10 +18,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      * Busca productos que coincidan con los filtros proporcionados.
      */
     @Query("SELECT p FROM Product p WHERE " +
-            "(:name IS NULL OR :name = '' OR LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'))) AND " +
-            "(:brand IS NULL OR :brand = '' OR LOWER(p.brand) LIKE LOWER(CONCAT('%', :brand, '%'))) AND " +
-            "(:category IS NULL OR :category = '' OR LOWER(p.category) LIKE LOWER(CONCAT('%', :category, '%')))")
-    List<Product> searchProducts(@Param("name") String name,
-                                 @Param("brand") String brand,
-                                 @Param("category") String category);
+            "(:search IS NULL OR :search = '' OR LOWER(p.name) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
+            "(:search IS NULL OR :search = '' OR LOWER(p.brand) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
+            "(:search IS NULL OR :search = '' OR LOWER(p.category) LIKE LOWER(CONCAT('%', :search, '%')))")
+    List<Product> searchProducts(@Param("search") String search);
 }

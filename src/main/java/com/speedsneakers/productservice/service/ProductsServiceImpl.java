@@ -34,22 +34,23 @@ public class ProductsServiceImpl implements ProductsService {
      */
     @Autowired
     public ProductsServiceImpl(ProductRepository productRepository) {
+        
         this.productRepository = productRepository;
     }
 
     /**
      * Obtiene productos que coincidan con los filtros proporcionados.
      *
-     * Return List<Product> Lista de productos que coinciden con los filtros.
+     * @param search El término de búsqueda para filtrar productos por nombre, marca o categoría.
+     * 
+     * @return Una lista de productos que coinciden con los filtros.
      */
     @Override
-    public List<ProductDto> getProducts(String name, String brand, String category) {
+    public List<ProductDto> getProducts(String search) {
 
-        if (StringUtils.hasLength(name)
-            || StringUtils.hasLength(brand)
-            || StringUtils.hasLength(category)) {
+        if (StringUtils.hasLength(search)) {
 
-            return productRepository.searchProducts(name, brand, category).stream().map(product ->
+            return productRepository.searchProducts(search).stream().map(product ->
                 new ProductDto(
                         product.getId(),
                         product.getName(),
@@ -79,7 +80,10 @@ public class ProductsServiceImpl implements ProductsService {
 
     /**
      * Obtiene un producto por su ID.
-     * Return Product Producto con el ID proporcionado.
+     * 
+     * @param id Identificador del producto.
+     * 
+     * @return ProductDto Producto con el ID proporcionado.
      */
     @Override
     public ProductDto getProductById(String id) {
@@ -100,7 +104,10 @@ public class ProductsServiceImpl implements ProductsService {
 
     /**
      * Crea un nuevo producto.
-     * Return Product Producto creado.
+     * 
+     * @param request Solicitud de creación del producto.
+     * 
+     * @return ProductDto Producto creado.
      */
     @Override
     public ProductDto createProduct(ProductRequest request) {
@@ -140,6 +147,14 @@ public class ProductsServiceImpl implements ProductsService {
         throw new InvalidProductRequest("Invalid product request");
     }
 
+    /**
+     * Actualiza un producto existente.
+     * 
+     * @param id Identificador del producto a actualizar.
+     * @param request Solicitud de actualización del producto.
+     * 
+     * @return ProductDto Producto actualizado.
+     */
     @Override
     public ProductDto updateProduct(String id, ProductRequest request) {
 
@@ -197,7 +212,7 @@ public class ProductsServiceImpl implements ProductsService {
      *
      * @param id Identificador del producto.
      *
-     * @return Producto encontrado.
+     * @return Product Producto encontrado.
      *
      * @throws ProductNotFoundException Si no se encuentra el producto.
      */

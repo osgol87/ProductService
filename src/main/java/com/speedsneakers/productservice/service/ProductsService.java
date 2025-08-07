@@ -14,8 +14,12 @@ public interface ProductsService {
 
     /**
      * Obtiene productos que coincidan con los filtros proporcionados.
+     * 
+     * @param search El término de búsqueda para filtrar productos por nombre, marca o categoría.
+     * 
+     * @return Una lista de productos que coinciden con los filtros.
      */
-    List<ProductDto> getProducts(String name, String brand, String category);
+    List<ProductDto> getProducts(String search);
 
     /**
      * Obtiene un producto por su ID.
