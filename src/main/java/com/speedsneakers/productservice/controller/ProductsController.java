@@ -44,7 +44,7 @@ public class ProductsController {
     public ResponseEntity<List<ProductDto>> getProducts(
             @RequestParam(required = false) String search) {
 
-        List<ProductDto> products = productsService.getProducts(name, brand, category);
+        List<ProductDto> products = productsService.getProducts(search);
         return ResponseEntity.ok(products);
     }
 
