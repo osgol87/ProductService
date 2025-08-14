@@ -13,7 +13,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: ${PRODUCTSERVICE_SHOW_SQL:true}
     hibernate:
-      ddl-auto: ${PRODUCTSERVICE_DDL_AUTO:validate}
+      ddl-auto: ${PRODUCTSERVICE_DDL_AUTO:create}
 
 eureka:
   client:
